@@ -26,7 +26,10 @@ def index(request):
     l=list(users.values("total_price"))
     
     user_count = User.objects.count()
-    ort=float(us[0])/user_count
+    try:
+        ort=float(us[0])/user_count
+    except TypeError:
+        ort = 0
     
 
 
