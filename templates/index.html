@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+{% load mathfilters %}
+{% block body %}
+{% load crispy_forms_tags %}
+   
+    <div class = "row">
+        <div class = "col-md-6 offset-md-3">
+             <h3>Alışveriş Gir </h3>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                {{form|crispy}}
+                <br>
+                <button type="submit" class= "btn btn-danger">Ekle</button>
+            </form>
+        
+        </div>
+    </div>
+<br>
+<br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Kullanıcı Adı</th>
+      <th scope="col">Tutar</th>
+      <th scope="col">Alışveriş Türü</th>
+      <th scope="col">Tarih</th>
+      <th scope="col">Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+  {% for hesap in hesaps %}
+    <tr>
+      <th scope="row">{{hesap.id}}</th>
+      <td>{{hesap.author}}</td>
+      <td>{{hesap.total}}</td>
+      <td>{{hesap.shopping_type}}</td>
+      <td>{{hesap.created_date}}</td>
+      <td><a href="/expenses/delete/{{hesap.id}}" class = "btn btn-danger">Sil</a></td>
+    </tr>
+  {% endfor %}
+
+    
+  </tbody>
+</table>
+
+
+    <br><br>
+
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Kullanıcı Adı</th>
+      <th scope="col">Tutar</th>
+      <th scope="col">Ortalama </th>
+      <th scope="col">Ödenecek</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  
+    
+
+
+  {% for user in users %}
+    <tr>
+      
+      <th scope="row">{{user.id}}</th>
+      <td>{{user.username}}</td>
+      <td>{{user.total_price}}</td>
+      <td>{{ort}}</td>
+      <td>{{ort|sub:user.total_price}}</td>
+    </tr>
+      
+    
+
+  {% endfor %}
+
+
+  
+  </tbody>
+
+</table>
+
+
+
+{% endblock body %}
