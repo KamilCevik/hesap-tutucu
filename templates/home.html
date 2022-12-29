@@ -1,7 +1,16 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block body %}
-    <h3>Anasayfa </h3>
-        <p> Hoşgeldin  </p>
+
+    
+    <h1 style="text-align: center; color: brown; margin-top: 6cm; margin-bottom: 2cm;" > Hesap Ayırma </h1>
+    {% if request.user.is_authenticated %}
+        <h3 style="text-align: center; color: white; text-transform: uppercase;" > Hoşgeldin {{user.first_name}}</h3>
+    
+    {% else %}
+        <h3 style="text-align: center; color: white;"> Hoşgeldiniz </h3>
+    {% endif %}
+        
 
 {% endblock body %}
